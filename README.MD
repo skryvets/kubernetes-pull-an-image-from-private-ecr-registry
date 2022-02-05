@@ -10,17 +10,17 @@
 
 - Step 3. Authorize with AWS ECR:
 
-      aws ecr get-login-password --region <aws_region> | docker login --username AWS --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com
+      aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com
 
 - Step 4. Tag your image with AWS ECR registry:
 
       docker images # shows image ids
 
-      docker tag <image_id> <aws_account_id>.dkr.ecr.<aws_region>.amazonaws.com/my-repository:tag
+      docker tag ${DOCKER_IMAGE_ID} ${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com/my-repository:tag
 
 - Step 4. Push the image using the docker push command:
 
-      docker push <aws_account_id>.dkr.ecr.<aws_region>.amazonaws.com/my-repository:tag
+      docker push ${AWS_ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com/my-repository:tag
 
 
 # Refresh ECR token
@@ -76,5 +76,16 @@ crontab -e
 
 ```
 
+## Second approach (using k8s CronJob resource):
 
+```bash
+# In the git repo navigate to the folder below
+cd ecr-token-refresh/2-k8s-cron-job
+cp manifest-ecr-helper-creds-sample.yml manifest-ecr-helper-creds.yml
+
+# Fill out all the required variables in manifest-ecr-helper-creds.yml and then deploy using commands below
+
+kubectl apply -f manifest-ecr-helper-creds.yml
+kubectl apply -f manifest-ecr-helper.yml
+```
 
