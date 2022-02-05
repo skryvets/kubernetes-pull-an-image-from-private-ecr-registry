@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ecr-registry-helper-secrets
+  namespace: health-check
+stringData:
+  AWS_SECRET_ACCESS_KEY: "xxxx"
+  AWS_ACCESS_KEY_ID: "xxx"
+  AWS_ACCOUNT: "xxx"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ecr-registry-helper-cm
+  namespace: health-check
+data:
+  AWS_REGION: "xxx"
+  DOCKER_SECRET_NAME: regcred
