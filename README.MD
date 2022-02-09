@@ -38,7 +38,7 @@ sudo chown $USER /var/log/aws-ecr-update-credentials.log
 sudo touch /usr/local/bin/aws-ecr-update-credentials.sh
 
 # Allow cronjob to execute the script under the user
-sudo chown $USER /usr/local/bin/aws-ecr-update-credentials.sh\
+sudo chown $USER /usr/local/bin/aws-ecr-update-credentials.sh
 
 # Make the script executable
 sudo chmod +x /usr/local/bin/aws-ecr-update-credentials.sh 
